@@ -1,13 +1,16 @@
 const express = require("express");
 const app = express();
 
-const Database = require("./config/database");
+const database = require("./config/database");
+const cors = require("cors");
 const dotenv = require("dotenv");
 
-Database.connect();
 dotenv.config();
-
 const PORT = process.env.PORT || 4000;
+
+//database connect
+database.connect();
+//middlewares
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -20,3 +23,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
 	console.log(`App is running at ${PORT}`)
 })
+
