@@ -36,8 +36,16 @@ const Signup = new mongoose.Schema(
         Gender:{
             type: String,
             enum: ["male" , "female"]
+        },
+        Image:{
+            type:String,
+            required:true,
         }
-    }
+
+    },
+    {
+        timestamps: true,
+      }
 );
 
 module.exports = mongoose.model("Signup", Signup);
