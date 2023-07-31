@@ -3,20 +3,21 @@ const mongoose=require('mongoose');
 
 const post = new mongoose.Schema(
     {
-        checkID: { 
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Signup'
-         },
+        userID: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Signup', // Refers to the Signup model for the user who made the post
+            required: true
+        },
         title:{
             type:String,
             required:true,
             trim:true
         },
-        Date:{
-            type:Date,
-            required:true,
-            default:Date.now()
-        },
+    
+        likes: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Likes' // Refers to the Likes model for storing likes on this post
+        }],
         description:{
             type:String,
             required:true,
@@ -25,16 +26,16 @@ const post = new mongoose.Schema(
             type:String,
             required:true,
         },
-        Likes:[
-            {
+        achievements: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Achievement' // Refers to the Achievement model for storing achievements related to this post
+        }],
 
-            }
-        ],
-        acheivementtag:[
-            {
-                
-            }
-        ]
-
+    },
+    {
+        timestamps: true,
     }
 )
+
+// Userpost collection
+module.exports = mongoose.model("Userpost", post);
